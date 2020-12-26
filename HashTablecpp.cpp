@@ -110,8 +110,8 @@ int insert(HashTable* ht, char* str)
 		ht->cellsTaken += 1;
 
 	ht->hashTable[index].chain = addToStart(ht->hashTable[index].chain, str);
-	
 	ht->numOfElements += 1;
+
 	return 1;
 }
 

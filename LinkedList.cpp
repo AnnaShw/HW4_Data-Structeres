@@ -1,7 +1,7 @@
 #include"LinkedList.h"
 
 
-void	PrintList(LinkedList* head)
+void PrintList(LinkedList* head)
 {
 	LinkedList* temp = head;
 	printf("\nThe list is: ");
@@ -15,13 +15,14 @@ void	PrintList(LinkedList* head)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 LinkedList* BuildNode(char* str)
 {
-	LinkedList* node = (LinkedList*)malloc(sizeof(LinkedList));
+	LinkedList* node = NULL;
+	node = (LinkedList*)malloc(sizeof(LinkedList));
 	if (node == NULL)
 		exit(1);
 
 	if (str != NULL) 
 	{
-		node->data = (char*)malloc(sizeof(str));
+		node->data = (char*)malloc(sizeof(str) + 1);
 		if (node->data == NULL)
 			exit(1);
 
@@ -35,15 +36,16 @@ LinkedList* BuildNode(char* str)
 		node->data = NULL;
 		node->next = NULL;
 	}
+
 	return node;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 LinkedList* addToStart(LinkedList* head, char* str)
 {
 	LinkedList* new_elem = BuildNode(str);
-	PrintList(head);
+
 	new_elem->next = head;
-	PrintList(new_elem);
+	
 	return new_elem;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -19,10 +19,13 @@ int main()
 
 	char path[] = "dictionary.txt";
 
-	HashTable*temp_table = initTable(5, 1);
+	HashTable*temp_table = initTable(4, 1);
 
 	if (parseWordsToTable(path, temp_table))
 		printf("Well done");
+
+
+	printf("%d", temp_table->numOfElements);
 
 	return 0;
 }
@@ -44,7 +47,7 @@ int parseWordsToTable(char* path, HashTable* ht)
 	while (fgets(buffer, max, ifp))
 	{ 
 		//Insert line by line and check for bugs(input problems
-		PrintList(ht->hashTable[3].chain);
+		
 		if (insert(ht, buffer) == 0)
 			return 0;
 	}
