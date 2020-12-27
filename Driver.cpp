@@ -11,6 +11,8 @@ SpellingSuggestion* spellingCheck(char* text);
 	Add help functions here...
 */
 
+
+
 int main()
 {
 	/*char* text = "iam afraid youare about to become teh immexdiate pst president of teh eing alive club ha ha glados";
@@ -19,16 +21,16 @@ int main()
 
 	char path[] = "dictionary.txt";
 
-	HashTable*temp_table = initTable(4, 2);
+	HashTable*temp_table = initTable(4, 1);
 
 	if (parseWordsToTable(path, temp_table))
 		printf("Well done\n");
 
-	char word[] = "well";
-	if(isWordInDictionary(temp_table, word))
-		printf("%d", temp_table->numOfElements);
+	char word[] = "idealer\n";
+	LinkedList* temp = addSpaceCheck(temp_table, word);
+	PrintList(temp);
 
-
+	
 	return 0;
 }
 
@@ -44,6 +46,7 @@ int parseWordsToTable(char* path, HashTable* ht)
 
 
 	char buffer[max];
+
 
 	// fgetc – read char from file
 	while (fgets(buffer, max, ifp))
@@ -64,3 +67,7 @@ int parseWordsToTable(char* path, HashTable* ht)
 //{
 //
 //}
+
+
+
+//Help func

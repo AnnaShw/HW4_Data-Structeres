@@ -95,13 +95,18 @@ int isInList(LinkedList* PHead, char* str)
 	{
 		if (strcmp(PHead->data, str) == 0) 
 		{
+			
 			return 1;
 		}
 		else if (PHead->next == NULL) {
+
+			
 			return 0;
 		}
 		PHead = PHead->next;
 	}
+
+
 	return 0;
-}
+ }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
