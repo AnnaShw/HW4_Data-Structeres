@@ -19,13 +19,15 @@ int main()
 
 	char path[] = "dictionary.txt";
 
-	HashTable*temp_table = initTable(4, 1);
+	HashTable*temp_table = initTable(4, 2);
 
 	if (parseWordsToTable(path, temp_table))
-		printf("Well done");
+		printf("Well done\n");
 
+	char word[] = "well";
+	if(isWordInDictionary(temp_table, word))
+		printf("%d", temp_table->numOfElements);
 
-	printf("%d", temp_table->numOfElements);
 
 	return 0;
 }
@@ -57,3 +59,8 @@ int parseWordsToTable(char* path, HashTable* ht)
 	
 	return 1;
 }
+
+//SpellingSuggestion* spellingCheck(char* text)
+//{
+//
+//}
