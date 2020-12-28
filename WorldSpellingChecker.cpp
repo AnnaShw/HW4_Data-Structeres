@@ -20,15 +20,15 @@ LinkedList* addSpaceCheck(HashTable* dictionaryTable, char* word)
 {
 	LinkedList* new_words = BuildNode(NULL);
 	int len = strlen(word);
-	printf("strlen %d\n", len);
 	
 	for (int i = 1; i < len; i++) 
 	{
-		char* first_temp = (char*)malloc(sizeof(char) * i);
+		char* first_temp = (char*)malloc(sizeof(char) *(i+1));
+
 		if (first_temp == NULL)
 			exit(1);
 
-		char* second_temp = (char*)malloc(sizeof(char) * (len - i));
+		char* second_temp = (char*)malloc(sizeof(char) * (len - i+1));
 		if (second_temp == NULL)
 			exit(1);
 
@@ -39,32 +39,30 @@ LinkedList* addSpaceCheck(HashTable* dictionaryTable, char* word)
 		}
 
 
-		first_temp[i] = '\n';
+		first_temp[i] = '\0';
 
 		//Sec el
 		for (int k = i, s = 0; k < len; k++, s++)
 		{
 			second_temp[s] = word[k];
 		}
+		second_temp[len-i] = '\0';
 
 		
-		printf("Fword:%s , size: %d\n", first_temp, strlen(first_temp));
-		printf("Sword:%s , size: %d\n", second_temp, strlen(second_temp));
 
 		//send to function
 		if (isWordInDictionary(dictionaryTable, first_temp) && isWordInDictionary(dictionaryTable, first_temp))
 		{
 			strcat(first_temp, " ");
 			strcat(first_temp, second_temp);
-			
+			free(second_temp);
 			//CREATE LINKEDlIST contains split string
 			new_words = addToStart(new_words, first_temp);
-
+			//free(first_temp);
 		}
 
 		//clean temp words
-		free(first_temp);
-		free(second_temp);
+		
 	}
 
 	PrintList(new_words);

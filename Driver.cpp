@@ -25,8 +25,9 @@ int main()
 
 	if (parseWordsToTable(path, temp_table))
 		printf("Well done\n");
-
-	char word[] = "idealer\n";
+	
+	
+	char word[] = "idealer";
 	LinkedList* temp = addSpaceCheck(temp_table, word);
 	PrintList(temp);
 
@@ -51,6 +52,7 @@ int parseWordsToTable(char* path, HashTable* ht)
 	// fgetc – read char from file
 	while (fgets(buffer, max, ifp))
 	{ 
+		buffer[strlen(buffer) - 1] = '\0';
 		//Insert line by line and check for bugs(input problems
 		
 		if (insert(ht, buffer) == 0)
