@@ -22,7 +22,7 @@ LinkedList* BuildNode(char* str)
 
 	if (str != NULL) 
 	{
-		node->data = (char*)malloc(sizeof(str) + 1);
+		node->data = (char*)malloc(strlen(str) + 1);
 		if (node->data == NULL)
 			exit(1);
 
