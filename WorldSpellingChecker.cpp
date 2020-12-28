@@ -238,21 +238,61 @@ LinkedList* getWordSuggestions(HashTable* dictionaryTable, char* word)
 	LinkedList* afterCHeck = BuildNode(NULL);
 
 	afterCHeck = addCharacterCheck(dictionaryTable, word);
-	
-	afterCHeck->next = splenditList;
-	splitList(afterCHeck);
+	PrintList(afterCHeck);
+	FindingDuplicates(afterCHeck);
+	PrintList(afterCHeck);
 
+	splenditList = addSpaceCheck(dictionaryTable, word);
+	PrintList(splenditList);
+	FindingDuplicates(splenditList);
+	PrintList(splenditList);
+	concatenateLists(afterCHeck, splenditList);
+	PrintList(afterCHeck);
 
-	
+	splenditList = replaceCharacterCheck(dictionaryTable, word);
+	concatenateLists(afterCHeck, splenditList);
+	PrintList(afterCHeck);
+	FindingDuplicates(afterCHeck);
+	PrintList(afterCHeck);
+
+	/*splenditList = deleteCharacterCheck(dictionaryTable, word);
+	PrintList(splenditList);
+	concatenateLists(afterCHeck, splenditList);
+	PrintList(afterCHeck);
+	FindingDuplicates(afterCHeck);
+	PrintList(afterCHeck);*/
 
 	return splenditList;
 }
 
 //Hfunc
-void splitList(LinkedList* splenditList)
-{	
-	while (splenditList->next->next != NULL) {
-		if (strcmp(splenditList->data, splenditList->next->data) == 0)
-			splenditList->next = splenditList->next->next;
+void FindingDuplicates(LinkedList* lst1)
+{
+	LinkedList* dup = BuildNode(NULL);
+	LinkedList* lst2 = BuildNode(NULL);
+	while (lst1 != NULL && lst1->next != NULL) {
+		lst2 = lst1;
+		while (lst2->next->data!= NULL) {
+			if (strcmp(lst1->data, lst2->next->data) == 0) {
+				dup = lst2->next;
+				lst2->next = lst2->next->next;
+				free(dup);
+			}
+			else
+			 lst2 = lst2->next;
+		}
+		lst1 = lst1->next;
 	}
+}
+
+
+void concatenateLists(LinkedList* lst1, LinkedList* lst2)
+{
+	if (lst1->next == NULL)
+	{
+		lst1->next = lst2;
+	}
+	else
+		concatenateLists(lst1->next, lst2);
+	
 }

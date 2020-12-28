@@ -23,7 +23,9 @@ LinkedList* getWordSuggestions(HashTable* dictionaryTable, char* word);
 
 
 //HFunc
-void splitList(LinkedList* splenditList);
+void FindingDuplicates(LinkedList* splenditList);
+void concatenateLists(LinkedList* lst1, LinkedList* lst2);
+void deleteNULLNode(LinkedList* lst);
 
 class WorldSpellingChecker
 {

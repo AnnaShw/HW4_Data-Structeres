@@ -27,8 +27,8 @@ int main()
 		printf("Well done\n");
 	
 	
-	char word[] = "ksis";
-	LinkedList* temp = switchAdjacentCharacterCheck(temp_table, word);
+	char word[] = "soun";
+	LinkedList* temp = getWordSuggestions(temp_table, word);
 	PrintList(temp);
 
 	
