@@ -21,6 +21,10 @@ LinkedList* addCharacterCheck(HashTable* dictionaryTable, char* word);
 LinkedList* switchAdjacentCharacterCheck(HashTable* dictionaryTable, char* word);
 LinkedList* getWordSuggestions(HashTable* dictionaryTable, char* word);
 
+
+//HFunc
+void splitList(LinkedList* splenditList);
+
 class WorldSpellingChecker
 {
 };

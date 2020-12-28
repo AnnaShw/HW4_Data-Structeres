@@ -27,8 +27,8 @@ int main()
 		printf("Well done\n");
 	
 	
-	char word[] = "idealer";
-	LinkedList* temp = addSpaceCheck(temp_table, word);
+	char word[] = "ksis";
+	LinkedList* temp = switchAdjacentCharacterCheck(temp_table, word);
 	PrintList(temp);
 
 	
