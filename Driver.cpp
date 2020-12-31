@@ -6,10 +6,11 @@ int const max = 20;
 
 int parseWordsToTable(char* path, HashTable* ht);
 
-SpellingSuggestion* spellingCheck(char* text);
-/*
-	Add help functions here...
-*/
+SpellingSuggestion* spellingCheck(char* text, HashTable* temp_table);
+
+//HelpFunc
+SpellingSuggestion* BuildSpelling(HashTable* temp_table, char* str);
+void PrintSpellingSuggestion(SpellingSuggestion* temp);
 
 
 
@@ -27,9 +28,9 @@ int main()
 		printf("Well done\n");
 	
 	
-	char word[] = "soun";
-	LinkedList* temp = getWordSuggestions(temp_table, word);
-	PrintList(temp);
+	char word[] = "iam afraid youare about to become teh immexdiate pst president of teheing alive club ha ha glados";
+	SpellingSuggestion* temp = spellingCheck(word, temp_table);
+	PrintSpellingSuggestion(temp);
 
 	
 	return 0;
@@ -65,11 +66,76 @@ int parseWordsToTable(char* path, HashTable* ht)
 	return 1;
 }
 
-//SpellingSuggestion* spellingCheck(char* text)
-//{
-//
-//}
 
+SpellingSuggestion* spellingCheck(char* text, HashTable* temp_table)
+{	
+	
+	char newString[20][20];
+	int i; int j = 0; int size = 0;
+
+	for (i = 0; i <= (strlen(text)); i++)
+	{
+		// if space or NULL found, assign NULL into newString[ctr]
+		if (text[i] == ' ' || text[i] == '\0')
+		{
+			newString[size][j] = '\0';
+			size++;  //for next word
+			j = 0;    //for next word, init index to 0
+		}
+		else
+		{
+			newString[size][j] = text[i];
+			j++;
+		}
+	}
+
+
+	SpellingSuggestion* temp = (SpellingSuggestion*)malloc(sizeof(SpellingSuggestion));
+
+	temp = BuildSpelling(temp_table, newString[0]);
+	printf("\n Strings or words after split by space are :\n");
+	for (i = 1; i < size; i++)
+	{
+		temp->next = BuildSpelling(temp_table, newString[i]);
+		temp = temp->next;
+	}
+		
+	return temp;
+}
 
 
 //Help func
+void PrintSpellingSuggestion(SpellingSuggestion* temp)
+{
+	while (temp->next != NULL)
+	{
+		printf("The word %s was misspelled.Did you mean : ", temp->originalWord);
+		PrintList(temp->suggestions);
+
+		temp = temp->next;
+	}
+}
+
+
+SpellingSuggestion* BuildSpelling(HashTable* temp_table,char* str)
+{
+	SpellingSuggestion* node = NULL;
+	node = (SpellingSuggestion*)malloc(sizeof(SpellingSuggestion));
+	if (node == NULL)
+		exit(1);
+
+	if (str != NULL)
+	{
+		node->originalWord = (char*)malloc(strlen(str) + 1);
+		if (node->originalWord == NULL)
+			exit(1);
+
+		strcpy(node->originalWord, str);
+
+		node->suggestions = getWordSuggestions(temp_table, str);
+		
+		node->next = NULL;
+	}
+
+	return node;
+}

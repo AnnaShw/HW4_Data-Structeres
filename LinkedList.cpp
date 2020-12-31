@@ -4,7 +4,6 @@
 void PrintList(LinkedList* head)
 {
 	LinkedList* temp = head;
-	printf("\nThe list is: ");
 	while (temp != NULL)
 	{
 		printf("%s ", temp->data);

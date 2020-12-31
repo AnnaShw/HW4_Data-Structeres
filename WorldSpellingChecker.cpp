@@ -239,30 +239,30 @@ LinkedList* getWordSuggestions(HashTable* dictionaryTable, char* word)
 
 	afterCHeck = addCharacterCheck(dictionaryTable, word);
 	PrintList(afterCHeck);
-	FindingDuplicates(afterCHeck);
-	PrintList(afterCHeck);
 
 	splenditList = addSpaceCheck(dictionaryTable, word);
-	PrintList(splenditList);
-	FindingDuplicates(splenditList);
 	PrintList(splenditList);
 	concatenateLists(afterCHeck, splenditList);
 	PrintList(afterCHeck);
 
 	splenditList = replaceCharacterCheck(dictionaryTable, word);
-	concatenateLists(afterCHeck, splenditList);
-	PrintList(afterCHeck);
-	FindingDuplicates(afterCHeck);
-	PrintList(afterCHeck);
-
-	/*splenditList = deleteCharacterCheck(dictionaryTable, word);
 	PrintList(splenditList);
 	concatenateLists(afterCHeck, splenditList);
 	PrintList(afterCHeck);
-	FindingDuplicates(afterCHeck);
-	PrintList(afterCHeck);*/
+	
+	splenditList = deleteCharacterCheck(dictionaryTable, word);
+	PrintList(splenditList);
+	concatenateLists(afterCHeck, splenditList);
+	PrintList(afterCHeck);
+	
 
-	return splenditList;
+	splenditList = switchAdjacentCharacterCheck(dictionaryTable, word);
+	PrintList(splenditList);
+	concatenateLists(afterCHeck, splenditList);
+	PrintList(afterCHeck);
+	
+	FindingDuplicates(afterCHeck);
+	return afterCHeck;
 }
 
 //Hfunc
@@ -286,13 +286,26 @@ void FindingDuplicates(LinkedList* lst1)
 }
 
 
-void concatenateLists(LinkedList* lst1, LinkedList* lst2)
-{
-	if (lst1->next == NULL)
+void concatenateLists(LinkedList* list1, LinkedList* list2)
+{	
+	if (list1->data == NULL && list2->data != NULL)
 	{
-		lst1->next = lst2;
+		list1->data = (char*)malloc(strlen(list2->data));
+		strcpy(list1->data, list2->data);
+		list1->next = list2->next;
 	}
-	else
-		concatenateLists(lst1->next, lst2);
-	
+	else if(list2->data != NULL)
+	{
+		while (list1->next->next != NULL)
+		{
+			list1 = list1->next;
+		}
+
+		//Add check for list2 not null
+		if (list2->data != NULL)
+		{
+			list1->next = list2;
+		}
+	}
+
 }
