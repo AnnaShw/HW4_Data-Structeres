@@ -4,8 +4,8 @@
 
 int const max = 20;
 
-int parseWordsToTable(char* path, HashTable* ht);
 
+int parseWordsToTable(char* path, HashTable* ht);
 SpellingSuggestion* spellingCheck(char* text, HashTable* temp_table);
 
 //HelpFunc
@@ -16,23 +16,23 @@ void PrintSpellingSuggestion(SpellingSuggestion* temp);
 
 int main()
 {
-	/*char* text = "iam afraid youare about to become teh immexdiate pst president of teh eing alive club ha ha glados";
-	SpellingSuggestion* spellingSuggestions = spellingCheck(text);
-	printSpellingSuggestions(spellingSuggestions);*/
-
+	//Dictinary path
 	char path[] = "dictionary.txt";
 
+	//Init hash table
 	HashTable*temp_table = initTable(4, 1);
 
+	//Fill table with words
 	if (parseWordsToTable(path, temp_table))
-		printf("Well done\n");
+		printf("Well done words in the table\n");
 	
-	
+	//String to check
 	char word[] = "iam afraid youare about to become teh immexdiate pst president of teheing alive club ha ha glados";
+
+	//String check function
 	SpellingSuggestion* temp = spellingCheck(word, temp_table);
 	PrintSpellingSuggestion(temp);
 
-	
 	return 0;
 }
 
@@ -70,7 +70,7 @@ int parseWordsToTable(char* path, HashTable* ht)
 SpellingSuggestion* spellingCheck(char* text, HashTable* temp_table)
 {	
 	
-	char newString[20][20];
+	char newString[max][max];
 	int i; int j = 0; int size = 0;
 
 	for (i = 0; i <= (strlen(text)); i++)
